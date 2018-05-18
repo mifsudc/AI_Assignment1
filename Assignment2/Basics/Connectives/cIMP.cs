@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Assignment2
 {
-    class Program
+    class cIMP 
     {
-        static void Main(string[] args)
+        public void Evaluate(Sentence s1, Sentence s2)
         {
-            Parser lParser = new Parser();
-            lParser.Parse();
-            Console.ReadLine();
+
         }
     }
 }

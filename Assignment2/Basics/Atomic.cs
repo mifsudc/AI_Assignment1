@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Assignment2
 {
-    class Program
+    class Atomic : Sentence
     {
-        static void Main(string[] args)
+        private String fName;
+
+        public Atomic(String aName)
         {
-            Parser lParser = new Parser();
-            lParser.Parse();
-            Console.ReadLine();
+            fName = aName;
         }
+
+        public string Name { get => fName; }
     }
 }

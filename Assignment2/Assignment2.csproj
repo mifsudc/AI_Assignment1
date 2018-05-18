@@ -42,6 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm\BC.cs" />
+    <Compile Include="Algorithm\FC.cs" />
+    <Compile Include="Algorithm\Inference.cs" />
+    <Compile Include="Algorithm\RES.cs" />
+    <Compile Include="Algorithm\TT.cs" />
+    <Compile Include="Basics\Atomic.cs" />
+    <Compile Include="Basics\Complex.cs" />
+    <Compile Include="Basics\Connectives\cNOT.cs" />
+    <Compile Include="Basics\Connectives\cAND.cs" />
+    <Compile Include="Basics\Connectives\cIMP.cs" />
+    <Compile Include="Basics\Connectives\cOR.cs" />
+    <Compile Include="Basics\KB.cs" />
+    <Compile Include="Basics\Parser.cs" />
+    <Compile Include="Basics\Sentence.cs" />
+    <Compile Include="Basics\Symbol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
