@@ -9,10 +9,9 @@ namespace Assignment2
 {
     class KB
     {
-        public List<String> fSymbols = new List<String>();
-        public List<Sentence> fSentences = new List<Sentence>();
+        public List<String> fLiterals = new List<String>();
+        public List<Sentence> fTell = new List<Sentence>();
+        public String fAsk;
         public bool fHornForm = true;
-        public Sentence fTarget;
-
     }
 }

@@ -12,7 +12,7 @@ namespace Assignment2
 
         public string Execute(KB aKb)
         {
-            List<String> aSymbols = aKb.fSymbols;
+            List<String> aSymbols = aKb.fLiterals;
 
             // create 2^n world models
             for (int i = 0; i < Math.Pow(2, aSymbols.Count); i++)
@@ -26,8 +26,19 @@ namespace Assignment2
                 }
             }
 
+            // test world construction
+            /*foreach (Dictionary<string, bool> d in fWorlds)
+            {
+                foreach (string s in d.Keys)
+                {
+                    Console.WriteLine(s + ": " + d[s]);
+                }
+                Console.WriteLine();
+                Console.ReadLine();
+            }*/
+
             // Order by symbol count for convenience
-            List<Sentence> aSentences = aKb.fSentences.OrderBy( x => x.Count ).ToList();
+            List<Sentence> aSentences = aKb.fTell.OrderBy( x => x.Count ).ToList();
             // enumerate sentences, evaluate validity of each world
             List<Dictionary<string, bool>> lDelete = new List<Dictionary<string, bool>>();
             foreach (Sentence lS in aSentences)
@@ -47,6 +58,16 @@ namespace Assignment2
                 {
                     return "NO";
                 }
+            }
+
+            foreach (Dictionary<string, bool> d in fWorlds)
+            {
+                foreach (string s in d.Keys)
+                {
+                    Console.WriteLine(s + ": " + d[s]);
+                }
+                Console.WriteLine();
+                Console.ReadLine();
             }
 
             return "YES: " + fWorlds.Count;

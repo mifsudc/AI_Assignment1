@@ -14,7 +14,7 @@ namespace Assignment2
             {
                 return "FC requires horn form KB.";
             }
-
+            /*
             List<Sentence> aClauses = aKb.fSentences.OrderBy(x => x.Count).ToList();
 
             List<Sentence> lAgenda = new List<Sentence>();
@@ -49,7 +49,7 @@ namespace Assignment2
 
                     
                 }
-            }
+            }*/
 
             return "";
         }

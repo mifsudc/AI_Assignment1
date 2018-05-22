@@ -33,6 +33,18 @@ namespace Assignment2
             }
         }
 
-        public int Count;
+        public override bool Evaluate(Dictionary<string, bool> aModel)
+        {
+            bool lResult = fSentences[0].Evaluate(aModel);
+
+            // skip first element already stored in lResult
+            foreach (Sentence lS in fSentences.Skip(1))
+            {
+                // enumerate subsentences and evaluate to bool
+                lResult = fCon.Evaluate(lResult, lS.Evaluate(aModel));
+            }
+
+            return lResult;
+        }
     }
 }

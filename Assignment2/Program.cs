@@ -11,7 +11,13 @@ namespace Assignment2
         static void Main(string[] args)
         {
             Parser lParser = new Parser();
-            lParser.Parse();
+            KB kb = lParser.Parse();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            TT alg = new TT();
+            Console.WriteLine( alg.Execute(kb) );
+
             Console.ReadLine();
         }
     }

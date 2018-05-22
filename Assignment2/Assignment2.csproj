@@ -49,10 +49,11 @@
     <Compile Include="Algorithm\TT.cs" />
     <Compile Include="Basics\Atomic.cs" />
     <Compile Include="Basics\Complex.cs" />
-    <Compile Include="Basics\Connectives\cNOT.cs" />
-    <Compile Include="Basics\Connectives\cAND.cs" />
-    <Compile Include="Basics\Connectives\cIMP.cs" />
-    <Compile Include="Basics\Connectives\cOR.cs" />
+    <Compile Include="Basics\Connectives\AND.cs" />
+    <Compile Include="Basics\Connectives\BICOND.cs" />
+    <Compile Include="Basics\Connectives\Connective.cs" />
+    <Compile Include="Basics\Connectives\IMPLIES.cs" />
+    <Compile Include="Basics\Connectives\OR.cs" />
     <Compile Include="Basics\KB.cs" />
     <Compile Include="Basics\Parser.cs" />
     <Compile Include="Basics\Sentence.cs" />

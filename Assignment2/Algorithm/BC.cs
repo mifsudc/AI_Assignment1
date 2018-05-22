@@ -12,7 +12,7 @@ namespace Assignment2
         {
             if (!aKb.fHornForm)
             {
-                return "FC requires horn form KB.";
+                return "BC requires horn form KB.";
             }
 
 

@@ -10,25 +10,27 @@ namespace Assignment2
     class Parser
     {
         private Dictionary<String, Atomic> fLiterals;
-        private Dictionary<String, Symbol> fSymbols;
+        private Dictionary<String, Connective> fCons;
 
         public Parser()
         {
             fLiterals = new Dictionary<string, Atomic>();
-            fSymbols = new Dictionary<string, Symbol>();
+            fCons = new Dictionary<string, Connective>();
 
             // *** create connectives dict ***
-            fSymbols.Add( "=>", new Connective("=>") );
-            fSymbols.Add( "&", new Symbol("&") );
+            fCons.Add( "=>", new IMPLIES() );
+            fCons.Add( "&", new AND() );
+            fCons.Add( "\\/", new OR() );
+            fCons.Add( "<=>", new BICOND() );
         }
 
-        public void Parse()
+        public KB Parse()
         {
             StreamReader lReader = new StreamReader("../../test.txt");
 
-            String lAsk;
+            KB lResult = new KB();
+
             List<String> lStrings = new List<String>();
-            List<Sentence> lTell = new List<Sentence>();
 
             while (!lReader.EndOfStream)
             {
@@ -60,13 +62,13 @@ namespace Assignment2
                         Console.WriteLine("SPLIT: " + lString);
 
                         // create actual sentences from string:sentences
-                        lTell.Add( ConvertSentence( lString ) );
+                        lResult.fTell.Add( ConvertSentence( lString ) );
                     }
                 }
                 else
                 {
                     // read ASK sentence
-                    lAsk = lReader.ReadLine();
+                    lResult.fAsk = lReader.ReadLine();
                 }
             }
 
@@ -74,7 +76,7 @@ namespace Assignment2
 
             // Write sentences
             Console.WriteLine("SENTENCES READ:");
-            foreach (Sentence lS in lTell)
+            foreach (Sentence lS in lResult.fTell)
             {
                 Console.WriteLine("SENTENCE: " + lS.Name);
             }
@@ -83,6 +85,9 @@ namespace Assignment2
             {
                 Console.WriteLine("LITERAL: " + A.Name);
             }
+            lResult.fLiterals = fLiterals.Keys.ToList();
+
+            return lResult;
         }
 
         private Sentence ConvertSentence(String lInput) // TODO add biconditionals & disjunctions
@@ -99,7 +104,7 @@ namespace Assignment2
                     lSentences.Add( ConvertSentence(lSS) );
                 }
 
-                return new Complex(lSentences, fSymbols["=>"]);
+                return new Complex(lSentences, fCons["=>"]);
             }
             // split conjunctions &
             if (lInput.Contains("&"))
@@ -113,7 +118,7 @@ namespace Assignment2
                     lSentences.Add(ConvertSentence(lSS));
                 }
 
-                return new Complex(lSentences, fSymbols["&"]);
+                return new Complex(lSentences, fCons["&"]);
             }
             // split negations ~
             if (lInput.Contains("~"))
@@ -121,7 +126,7 @@ namespace Assignment2
                 lInput = lInput.Substring(1);
                 List<Sentence> lSentences = new List<Sentence>();
                 lSentences.Add( ConvertSentence(lInput) );
-                return new Complex( lSentences, fSymbols["~"] );
+                return new Complex( lSentences, fCons["~"] );
             }
 
             if (!fLiterals.ContainsKey(lInput))

@@ -15,6 +15,11 @@ namespace Assignment2
             fName = aName;
         }
 
-        public string Name { get => fName; }
+        public override string Name { get => fName; }
+
+        public override bool Evaluate(Dictionary<string, bool> aModel)
+        {
+            return aModel[fName];
+        }
     }
 }
