@@ -46,16 +46,8 @@ namespace Assignment2
                     // strip whitespace
                     lRaw = String.Join("", lRaw.Split(' '));
 
-                    if (lRaw.Contains(";"))
-                    {
-                        // split into array of string:sentences
-                        lStrings = lRaw.Split( new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                    }
-                    else
-                    {
-                        // single string:sentence in TELL
-                        lStrings.Add(lRaw);
-                    }
+                    // split into array of string:sentences
+                    lStrings = lRaw.Split( new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
                     foreach (String lString in lStrings)
                     {

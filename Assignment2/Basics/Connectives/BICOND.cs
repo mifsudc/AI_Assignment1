@@ -15,7 +15,7 @@ namespace Assignment2
 
         public override bool Evaluate(bool aB1, bool aB2)
         {
-            return aB1 && aB2;
+            return ( aB1 && aB2 ) || ( !aB1 && !aB2 );
         }
     }
 }

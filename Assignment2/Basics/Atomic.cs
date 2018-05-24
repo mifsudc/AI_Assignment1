@@ -17,21 +17,22 @@ namespace Assignment2
 
         public override string Name { get => fName; }
 
+        public override string RHS { get => fName; }
+
         public override int Count { get => 1; set { } }
 
-        public override bool Evaluate(List<string> aModel)
+        public override List<string> Dependancies(List<string> aExclude)
         {
-            return aModel.Contains(fName);
+            List<string> lResult = new List<string>();
+            if ( !aExclude.Contains( fName ) )
+                lResult.Add(fName);
+            return lResult;
         }
 
-        public override string FindUnknown(List<string> aLiterals)
-        {
-            return fName;
-        }
+        public override bool Evaluate(List<string> aModel) => aModel.Contains(fName);
 
-        public override bool Query(string aLiteral)
-        {
-            return aLiteral == fName;
-        }
+        public override string FindUnknown(List<string> aLiterals) => fName;
+
+        public override bool Query(string aLiteral) => aLiteral == fName;
     }
 }

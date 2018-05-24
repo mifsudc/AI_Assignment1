@@ -12,10 +12,8 @@ namespace Assignment2
         {
             Parser lParser = new Parser();
             KB kb = lParser.Parse();
-            Console.WriteLine();
-            Console.WriteLine();
 
-            Inference Alg = new FC();
+            Inference Alg = new BC();
             Console.WriteLine( Alg.Execute(kb) );
 
             Console.ReadLine();

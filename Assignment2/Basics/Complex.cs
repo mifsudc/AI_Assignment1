@@ -42,6 +42,8 @@ namespace Assignment2
 
         public override int Count { get => fCount; set => fCount = value; }
 
+        public override string RHS { get => fSentences[1].RHS; }
+
         public override bool Evaluate(List<string> aModel)
         {
             bool lResult = fSentences[0].Evaluate(aModel);
@@ -56,6 +58,7 @@ namespace Assignment2
             return lResult;
         }
 
+        // find unknown literal
         public override string FindUnknown(List<string> aLiterals)
         {
             if ( fCount > 1 )
@@ -71,18 +74,25 @@ namespace Assignment2
                     break;
                 }
             }
-
             return lResult;
         }
 
+        // returns list of all dependant literals excluding those in provided list
+        public override List<string> Dependancies(List<string> aExclude)
+        {
+            List<string> lResult = new List<string>();
+
+            foreach (Sentence lS in fSentences)
+            {
+                lResult.AddRange( lS.Dependancies( aExclude ) );
+            }
+            return lResult;
+        }
+
+        // 
         public override bool Query( string aLiteral )
         {
-            if ( fSentences.Exists( x => x.Query(aLiteral) ) )
-            {
-                return true;
-            }
-
-            return false;
+            return fSentences.Exists( x => x.Query(aLiteral) );
         }
     }
 }
