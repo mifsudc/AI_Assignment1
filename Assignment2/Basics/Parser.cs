@@ -37,12 +37,12 @@ namespace Assignment2
                 // read file to end
                 if (lReader.ReadLine() == "TELL")
                 {
-                    Console.WriteLine("READING SENTENCES");
+                    //Console.WriteLine("READING SENTENCES");
 
                     // read TELL string:sentences
                     String lRaw = lReader.ReadLine();
-                    Console.WriteLine("RAW: " + lRaw);
-                    Console.WriteLine();
+                    //Console.WriteLine("RAW: " + lRaw);
+                    //Console.WriteLine();
                     // strip whitespace
                     lRaw = String.Join("", lRaw.Split(' '));
 
@@ -59,7 +59,7 @@ namespace Assignment2
 
                     foreach (String lString in lStrings)
                     {
-                        Console.WriteLine("SPLIT: " + lString);
+                        //Console.WriteLine("SPLIT: " + lString);
 
                         // create actual sentences from string:sentences
                         lResult.fTell.Add( ConvertSentence( lString ) );
@@ -75,7 +75,7 @@ namespace Assignment2
             lReader.Close();
 
             // Write sentences
-            Console.WriteLine("SENTENCES READ:");
+            /*Console.WriteLine("SENTENCES READ:");
             foreach (Sentence lS in lResult.fTell)
             {
                 Console.WriteLine("SENTENCE: " + lS.Name);
@@ -84,7 +84,8 @@ namespace Assignment2
             foreach (Atomic A in fLiterals.Values)
             {
                 Console.WriteLine("LITERAL: " + A.Name);
-            }
+            }*/
+
             lResult.fLiterals = fLiterals.Keys.ToList();
 
             return lResult;

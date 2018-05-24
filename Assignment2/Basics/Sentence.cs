@@ -11,12 +11,14 @@ namespace Assignment2
         // denotes whether the sentence is negated
         public bool Negation;
         // denotes the actual representation on the literal
-        public virtual String Name { get; }
+        public abstract String Name { get; }
         // denotes the number of unknowns in a sentence
-        public int Count;
+        public abstract int Count { get; set; }
         // given a complete world model, evaluates whether the world entails the sentence
-        public abstract bool Evaluate(Dictionary<string, bool> aModel);
+        public abstract bool Evaluate(List<string> aModel);
         // solves for the last unknown literal
-        //public abstract bool Query(string aLiteral);
+        public abstract string FindUnknown(List<string> aLiterals);
+        // queries whether the sentence contains the given literal
+        public abstract bool Query(string aLiteral);
     }
 }

@@ -15,8 +15,8 @@ namespace Assignment2
             Console.WriteLine();
             Console.WriteLine();
 
-            TT alg = new TT();
-            Console.WriteLine( alg.Execute(kb) );
+            Inference Alg = new FC();
+            Console.WriteLine( Alg.Execute(kb) );
 
             Console.ReadLine();
         }

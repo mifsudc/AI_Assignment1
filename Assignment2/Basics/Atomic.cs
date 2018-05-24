@@ -17,9 +17,21 @@ namespace Assignment2
 
         public override string Name { get => fName; }
 
-        public override bool Evaluate(Dictionary<string, bool> aModel)
+        public override int Count { get => 1; set { } }
+
+        public override bool Evaluate(List<string> aModel)
         {
-            return aModel[fName];
+            return aModel.Contains(fName);
+        }
+
+        public override string FindUnknown(List<string> aLiterals)
+        {
+            return fName;
+        }
+
+        public override bool Query(string aLiteral)
+        {
+            return aLiteral == fName;
         }
     }
 }

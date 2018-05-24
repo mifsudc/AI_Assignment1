@@ -57,7 +57,6 @@
     <Compile Include="Basics\KB.cs" />
     <Compile Include="Basics\Parser.cs" />
     <Compile Include="Basics\Sentence.cs" />
-    <Compile Include="Basics\Symbol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

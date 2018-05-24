@@ -8,21 +8,22 @@ namespace Assignment2
 {
     class TT : Inference
     {
-        List<Dictionary<string, bool>> fWorlds  = new List<Dictionary<string, bool>>();
+        List<List<string>> fWorlds = new List<List<string>>();
 
         public string Execute(KB aKb)
         {
-            List<String> aSymbols = aKb.fLiterals;
-
+            List<string> aSymbols = aKb.fLiterals;
+            
             // create 2^n world models
             for (int i = 0; i < Math.Pow(2, aSymbols.Count); i++)
             {
-                fWorlds.Add(new Dictionary<string, bool>());
+                fWorlds.Add(new List<string>());
 
                 for (int j = 0; j < aSymbols.Count; j++)
                 {
                     // evil bitwise magic
-                    fWorlds[i].Add(aSymbols[j], Convert.ToBoolean((i >> j) & 0b01));
+                    if (Convert.ToBoolean((i >> j) & 0b01))
+                    fWorlds[i].Add(aSymbols[j]);
                 }
             }
 
@@ -38,14 +39,14 @@ namespace Assignment2
             }*/
 
             // Order by symbol count for convenience
-            List<Sentence> aSentences = aKb.fTell.OrderBy( x => x.Count ).ToList();
+            List<Sentence> aSentences = aKb.fTell.OrderBy(x => x.Count).ToList();
             // enumerate sentences, evaluate validity of each world
-            List<Dictionary<string, bool>> lDelete = new List<Dictionary<string, bool>>();
+            List<List<string>> lDelete = new List<List<string>>();
             foreach (Sentence lS in aSentences)
             {
-                foreach (Dictionary<string, bool> lW in fWorlds)
+                foreach (List<string> lW in fWorlds)
                 {
-                    if ( !lS.Evaluate(lW) )
+                    if (!lS.Evaluate(lW))
                     {
                         lDelete.Add(lW);
                     }
@@ -60,11 +61,11 @@ namespace Assignment2
                 }
             }
 
-            foreach (Dictionary<string, bool> d in fWorlds)
+            foreach (List<string> d in fWorlds)
             {
-                foreach (string s in d.Keys)
+                foreach (string s in aSymbols)
                 {
-                    Console.WriteLine(s + ": " + d[s]);
+                    Console.WriteLine(s + ": " + d.Contains(s));
                 }
                 Console.WriteLine();
                 Console.ReadLine();

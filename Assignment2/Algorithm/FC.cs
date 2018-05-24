@@ -10,48 +10,58 @@ namespace Assignment2
     {
         public string Execute(KB aKb)
         {
+            // FC requires horn form
             if (!aKb.fHornForm)
             {
                 return "FC requires horn form KB.";
             }
-            /*
-            List<Sentence> aClauses = aKb.fSentences.OrderBy(x => x.Count).ToList();
+            
+            // instance list setup
+            List<Sentence> aTell = aKb.fTell.OrderBy( x => x.Count ).ToList();
+            List<Sentence> lComplete = new List<Sentence>();
+            List<string> lInferred = new List<string>();
 
-            List<Sentence> lAgenda = new List<Sentence>();
-            lAgenda.AddRange(aClauses.Where(x => x.Count == 1));
-
-            Dictionary<string, bool> lInferred = new Dictionary<string, bool>();
-            while ( !lInferred.ContainsKey( aKb.fTarget.Name ) )
+            // forward chaining process
+            List<Sentence> lClauses = aTell.FindAll( x => !lComplete.Contains(x) );
+            for (int i = 0; i < aTell.Count; i++)
             {
-                if ( lAgenda.Count == 0 )
-                    return "NO";
+                // find a sentence that can be used to infer a literal
+                Sentence lTempSent = lClauses.Find( x => x.Count == 1 );
 
-                // pop first symbol from agenda
-                Sentence aS = lAgenda[0];
-                lAgenda.Remove(aS);
-
-                if ( lInferred.ContainsKey(aS.Name) )
-                    continue;
-                lInferred.Add(aS.Name, true); // move dis shit somewhere
-
-                // enumerate rules
-                foreach ( Sentence aClause in aClauses )
+                // continue if sentence is found
+                if ( lTempSent != null )
                 {
-                    // clause contains current focus symbol
-                    if ( aClause.Query(aS.Name) )
+                    // infer the literal
+                    string lClause = lTempSent.FindUnknown( lInferred );
+                    lInferred.Add( lClause );
+                    if ( lClause == aKb.fAsk )
+                        break;
+                    Console.WriteLine(lClause);
+
+                    // add to used sentences list
+                    lComplete.Add( lTempSent );
+                    lClauses = aTell.FindAll( x => !lComplete.Contains(x) );
+
+                    // enumerate through sentences
+                    foreach (Sentence lSentence in lClauses)
                     {
-                        // clause contains 1 unknown -> can be entailed
-                        if (--aClause.Count == 1)
-                        {
-
-                        }
+                        // update if sentence contains new inferred literal
+                        if ( lSentence.Query(lClause) )
+                            lSentence.Count--;
                     }
-
-                    
                 }
-            }*/
+                else
+                    // no further implications can be deduced
+                    return "NO";
+            }
 
-            return "";
+            // prepare output
+            string lResult = "YES: ";
+            foreach (var lString in lInferred)
+                lResult += lString + ", ";
+            lResult = lResult.Remove( lResult.Count() - 2, 2 );
+
+            return lResult;
         }
     }
 }
